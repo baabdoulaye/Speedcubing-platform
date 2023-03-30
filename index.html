@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cube Timer</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="shortcut icon" href="./img/logo_reflet_2.jpg" type="image/x-icon" />
+  <script>
+  </script>
+  <!-- <script src="/js/chronometre.js"></script> -->
+</head>
+
+<body>
+  <a href="index.html">
+    <img id="logo" src="/img/definitive_logo.png" alt="">
+  </a>
+  <div onclick="randomRubiksCubeMove()" style="
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+        cursor: pointer; ;
+      " id="mouvements"></div>
+  <div class="ocean">
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
+  <h4 style="text-align: center;">Cube Timer est conçu pour ceux qui souhaitent se chronométrer en speedcubing</h4>
+  <h4 style="text-align: center; padding-bottom: 5%; padding-top: 3%;">
+    Maintiens la barre d'espace pour activer le chrono
+  </h4>
+  <span style="font-size: 100PX;" onclick="chronoStart()" id="chronotime">00:00</span>
+  <form name="chronoForm">
+    <input type="button" name="startstop" value="start!" onClick="chronoStart()" />
+    <input type="button" name="reset" value="reset!" onClick="chronoReset()" />
+  </form>
+  <div id="div_parent">
+    <div id="div_time">
+      <table>
+        <thead>
+          <tr>
+            <th style="margin: auto;" colspan="2">Temps</th>
+      </table>
+    </div>
+    <div id="div_avg">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align: center;" colspan="2">Moyennes</th>
+      </table>
+    </div>
+  </div>
+</body>
+<script>
+  var startTime = 0;
+  var start = 0;
+  var end = 0;
+  var diff = 0;
+  var timerID = 0;
+  function chrono() {
+    end = new Date();
+    diff = end - start;
+    diff = new Date(diff);
+    var msec = diff.getMilliseconds();
+    var sec = diff.getSeconds();
+    if (sec < 10) {
+      sec = "0" + sec;
+    }
+    if (msec < 10) {
+      msec = "00" + msec;
+    } else if (msec < 100) {
+      msec = "0" + msec;
+    }
+    document.getElementById("chronotime").innerHTML =
+      sec + ":" + msec;
+
+    timerID = setTimeout("chrono()", 10);
+  }
+  function chronoStart() {
+    document.chronoForm.startstop.value = "stop!";
+    document.chronoForm.startstop.onclick = chronoStop;
+    document.chronoForm.reset.onclick = chronoReset;
+    start = new Date();
+    chrono();
+  }
+  function chronoContinue() {
+    document.chronoForm.startstop.value = "stop!";
+    document.chronoForm.startstop.onclick = chronoStop;
+    document.chronoForm.reset.onclick = chronoReset;
+    start = new Date() - diff;
+    start = new Date(start);
+    chrono();
+  }
+  function chronoReset() {
+    document.getElementById("chronotime").innerHTML = "00:00:";
+    start = new Date();
+  }
+  function chronoStopReset() {
+    document.getElementById("chronotime").innerHTML = "00:00";
+    document.chronoForm.startstop.onclick = chronoStart;
+  }
+  function chronoStop() {
+    document.chronoForm.startstop.value = "start!";
+    document.chronoForm.startstop.onclick = chronoContinue;
+    document.chronoForm.reset.onclick = chronoStopReset;
+    clearTimeout(timerID);
+  }
+
+
+  // ------------------------CODE SCRAMBLE-----------------------------
+
+  const rubiksCubeMoves = {
+    U: 0,
+    "U'": 1,
+    U2: 2,
+    R: 3,
+    "R'": 4,
+    R2: 5,
+    L: 6,
+    "L'": 7,
+    L2: 8,
+    F: 9,
+    "F'": 10,
+    F2: 11,
+    B: 12,
+    "B'": 13,
+    B2: 14,
+    D: 15,
+    "D'": 16,
+    D2: 17,
+  };
+function generateRandomMoves(numMoves) {
+  const moves = Object.keys(rubiksCubeMoves);
+  const randomMoves = [];
+  let prevMove = '';
+
+  for (let i = 0; i < numMoves; i++) {
+    let randomMove = prevMove;
+    while (randomMove === prevMove) {
+      const randomIndex = Math.floor(Math.random() * moves.length);
+      randomMove = moves[randomIndex];
+    }
+    randomMoves.push(randomMove);
+    prevMove = randomMove;
+  }
+
+  return randomMoves;
+}
+
+  const mouvementsDiv = document.querySelector("#mouvements");
+  const numMoves = 20;
+  const initialMoves = generateRandomMoves(numMoves);
+
+  for (let i = 0; i < numMoves; i++) {
+    const h3 = document.createElement("h3");
+    h3.textContent = initialMoves[i];
+    mouvementsDiv.appendChild(h3);
+  }
+
+  mouvementsDiv.addEventListener("click", function () {
+    const newMoves = generateRandomMoves(numMoves);
+    mouvementsDiv.innerHTML = "";
+    for (let i = 0; i < numMoves; i++) {
+      const h3 = document.createElement("h3");
+      h3.textContent = newMoves[i];
+      mouvementsDiv.appendChild(h3);
+    }
+  })
+
+
+  // event = keyup or keydown
+  // document.addEventListener('keyup', event => {
+  //   if (event.code === 'Space') {
+  //     this.chronoStart();
+
+  //     var e = document.getElementById('chronotime');
+  //     e.style.color = 'green';
+  //   }
+  // })
+
+// ------------------------CHAT GPT CODE POUR REUSSIR A STOPPE RLE CHRONO EN APPUYANT UNE 2EME FOIS SUR LA SPACEBAR
+
+
+  let running = false;
+
+function chronoStart() {
+  if (!running) {
+    document.chronoForm.startstop.value = "stop!";
+    document.chronoForm.startstop.onclick = chronoStop;
+    document.chronoForm.reset.onclick = chronoReset;
+    start = new Date();
+    chrono();
+    running = true;
+  }
+}
+
+function chronoStop() {
+  if (running) {
+    document.chronoForm.startstop.value = "start!";
+    document.chronoForm.startstop.onclick = chronoContinue;
+    document.chronoForm.reset.onclick = chronoReset;
+    clearTimeout(timerID);
+    running = false;
+  }
+}
+
+document.addEventListener('keyup', event => {
+  if (event.code === 'Space') {
+    if (!running) {
+      chronoStart();
+      var e = document.getElementById('chronotime');
+      e.style.color = 'red';
+    } else {
+      chronoStop();
+      var e = document.getElementById('chronotime');
+      e.style.color = 'green';
+    }
+  }
+
+  
+});
+// ------------------------CHAT GPT CODE POUR REUSSIR A STOPPE RLE CHRONO EN APPUYANT UNE 2EME FOIS SUR LA SPACEBAR
+
+</script>
+
+</html>
