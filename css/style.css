@@ -2,78 +2,36 @@
   padding: 0;
   margin: 0;
 }
-
-html,
 body {
-  height: 100%;
-}
-
-body {
-  background: radial-gradient(
-    ellipse at center,
-    #fffeea 0%,
-    #fffeea 35%,
-    #b7e8eb 100%
-  );
+  background: linear-gradient(-45deg, #52eeba, #3c9de7, #0dd9e8, #23d5ab);
+  background-size: 400% 400%;
+  font-family: monospace;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
   overflow: hidden;
 }
-
-.ocean {
-  height: 5%;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #015871;
-}
-
-.wave {
-  background: url(https://cdn.kcak11.com/codepen_assets/wave_animation/wave.svg)
-    repeat-x;
-  position: absolute;
-  top: -198px;
-  width: 6400px;
-  height: 198px;
-  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-  transform: translate3d(0, 0, 0);
-}
-
-.wave:nth-of-type(2) {
-  top: -175px;
-  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
-    swell 7s ease -1.25s infinite;
-  opacity: 1;
-}
-
-@keyframes wave {
+/* animation background */
+@keyframes gradient {
   0% {
-    margin-left: 0;
-  }
-  100% {
-    margin-left: -1600px;
-  }
-}
-@keyframes swell {
-  0%,
-  100% {
-    transform: translate3d(0, -25px, 0);
+    background-position: 0% 50%;
   }
   50% {
-    transform: translate3d(0, 5px, 0);
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
-.endWave {
-  display: none;
-}
-
+/* chrono */
 #chronotime {
   display: flex;
   justify-content: center;
-  text-align: center;
   transition: 0.3s;
   font-family: "fredoka one", cursive;
   font-weight: 800;
   cursor: pointer;
+  animation-duration: 1s;
+  transform: scale(12deg);
 }
 #chronotime:active {
   color: #26e300;
@@ -82,12 +40,16 @@ body {
 #logo {
   width: 12%;
   border-bottom-right-radius: 25px;
+  transition: 0.5s;
 }
-
+/* scramble */
 #mouvements {
+  transition: 0.5s;
+  color: #0f4858;
   padding-bottom: 5%;
+  display: flex;
 }
-
+/* div de gauche (temps) */
 #div_time {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
@@ -99,7 +61,9 @@ body {
   animation-name: example;
   animation-duration: 3s;
   animation-iteration-count: infinite;
+  overflow: auto;
 }
+/* div de droite (moyennes) */
 
 #div_avg {
   background: rgba(255, 255, 255, 0.15);
@@ -112,35 +76,30 @@ body {
   animation-name: example;
   animation-duration: 3s;
   animation-iteration-count: infinite;
+  overflow: auto;
 }
+/* div parent des div time et div avg */
 #div_parent {
   display: flex;
+  transition: 0.5s;
   justify-content: space-evenly;
 }
-
+/* animation en continue des div time et div avg (effet de zoom)  */
 @keyframes example {
   0% {
-    width: 400px;
-    height: 200px;
-  }
-  50% {
     width: 380px;
     height: 180px;
   }
+  50% {
+    width: 350px;
+    height: 160px;
+  }
   100% {
-    width: 400px;
-    height: 200px;
+    width: 380px;
+    height: 180px;
   }
 }
-body {
-  font-family: monospace;
-}
-h4 {
-  animation-name: hey;
-  animation-duration: 3s;
-  font-size: 15px;
-  animation-iteration-count: infinite;
-}
+
 @keyframes hey {
   0% {
     font-size: 16px;
@@ -150,5 +109,65 @@ h4 {
   }
   100% {
     font-size: 16px;
+  }
+}
+
+h4 {
+  animation-name: hey;
+  animation-duration: 3s;
+  font-size: 15px;
+  transition: 0.5s;
+  animation-iteration-count: infinite;
+}
+/* tableau de la div_time */
+#tableau1 {
+  background-color: rgb(0, 97, 126);
+  color: white;
+  width: 100%;
+  font-weight: 800;
+}
+/* tableau de la div_avg */
+#tableau2 td {
+  text-align: center;
+  padding: 5px;
+  font-weight: 800;
+}
+h5 {
+  text-align: center;
+  font-size: 13px;
+  padding-top: 1px;
+  color: white;
+  background-color: #017128;
+}
+th {
+  background-color: rgb(0, 97, 126);
+  color: white;
+  width: 1%;
+}
+#tableau1:hover {
+  cursor: pointer;
+}
+/* -------------------------------RESPONSIVE----------------------------------- */
+/* en format mobile, la adiv parent passe en column */
+@media screen and (max-width: 768px) {
+  #div_parent {
+    flex-direction: column;
+    align-items: center;
+  }
+  #logo {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 500px) {
+  #mouvements {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  h4 {
+    animation: none;
+    padding-bottom: 8%;
+    padding-top: 9%;
   }
 }
