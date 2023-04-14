@@ -319,14 +319,32 @@
         var newRow = table.insertRow();
         var cell1 = newRow.insertCell(0);
         var cell2 = newRow.insertCell(1);
-   
 
         // Insérer la valeur du chronomètre dans la deuxième cellule de la nouvelle ligne du tableau
 
         cell1.innerHTML = table.rows.length;
         cell2.innerHTML = ". " + chronoTime;
+  
+
+
+        
+          //  afficher_best() 
+        // var table2 = document.getElementById("tableau2");
+        // var newRow2 = table2.insertRow();
+        // var cell3 = newRow2.insertCell(0);
+        // cell3.style.color = "green"
+        // cell3.innerHTML = "Best : " + chronoTime
+        
+    
+
+      // afficher worst 
+
+
+
+      // afficher average
 
       }}
+
 
 // fonction permettant de supprimer le dernier chrono enregistré en appuyant dans la div temps
 
@@ -344,7 +362,7 @@
         if (!running) {
           chronoStart();
 
-          // COLORER LE CHRONO EN ROUGE LORS DE SON ACTIVATION
+          // COLORER LE CHRONO EN NOIR LORS DE SON ACTIVATION
           var colorer_chronometre = document.getElementById("chronotime");
           colorer_chronometre.style.color = "black";
    
@@ -366,7 +384,7 @@
           var disparition_logo = document.getElementById("logo");
           disparition_logo.style.opacity = "0";
 
-       // effet de retrecissement des elements de la page lors de l'arret du chrono 
+       // effet de retrecissement des elements de la page lors du démarrage du chrono 
 
         var retrecissement_h4 = document.getElementById("hh");
           retrecissement_h4.style.scale = "0";
