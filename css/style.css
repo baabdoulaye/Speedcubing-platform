@@ -3,10 +3,10 @@
   margin: 0;
 }
 body {
-  background: linear-gradient(-45deg, #52eeba, #3c9de7, #0dd9e8, #23d5ab);
+  background: linear-gradient(-45deg, #3c9de7, #23d5ab);
   background-size: 400% 400%;
   font-family: monospace;
-  animation: gradient 15s ease infinite;
+  animation: gradient 5s ease infinite;
   height: 100vh;
   overflow: hidden;
 }
@@ -147,8 +147,29 @@ th {
 #tableau1:hover {
   cursor: pointer;
 }
+#tout_supprimer {
+  width: 115px;
+  height: 30px;
+  background-color: #3c9de7;
+  color: #fff;
+  font-family: monospace;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: 0.5s;
+}
+
+#tout_supprimer:hover {
+  transform: scale(1.1);
+}
+#bouton_parent_tout_supprimer {
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
+}
 /* -------------------------------RESPONSIVE----------------------------------- */
-/* en format mobile, la adiv parent passe en column */
+/* en format mobile, la div parent passe en column */
 @media screen and (max-width: 768px) {
   #div_parent {
     flex-direction: column;

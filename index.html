@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <!-- logo -->
+    <!-- logo --> 
     <a href="index.html">
       <img id="logo" src="/img/definitive_logo.png" alt="" />
     </a>
@@ -43,6 +43,16 @@
     <span style="font-size: 100px" onclick="chronoStopReset()" id="chronotime"
       >00:00</span
     >
+    <!-- Le Bouton tout supprimer -->
+     <a id="bouton_parent_tout_supprimer" style="text-decoration: none;" href="">
+       <input
+         type="button"
+         name="reset"
+         id="tout_supprimer"
+         value="Erase Times"
+       />
+     </a>
+
     <form name="chronoForm">
       <!-- les 2 boutons start et reset non visibles mais que je ne dois pas supprimer -->
       <input
@@ -291,6 +301,9 @@
         var reaparition_logo = document.getElementById("logo");
         reaparition_logo.style.opacity = "1";
 
+        var reaparition_bouton_parent_tout_supprimer = document.getElementById("bouton_parent_tout_supprimer");
+          reaparition_bouton_parent_tout_supprimer.style.scale = "1";
+
 // effet d'agrandissement des elements de la page lors de l'arret du chrono 
 
         var agrandissement_h4 = document.getElementById("hh");
@@ -311,6 +324,9 @@
           var chrono_taille_initiale = document.getElementById("chronotime");
           chrono_taille_initiale.style.scale = "1";
 
+          var agrandissement_bouton_parent_tout_supprimer = document.getElementById("bouton_parent_tout_supprimer");
+          agrandissement_bouton_parent_tout_supprimer.style.scale = "1";
+
         // Récupérer la valeur du chronomètre
         var chronoTime = document.getElementById("chronotime").innerHTML;
 
@@ -323,25 +339,9 @@
         // Insérer la valeur du chronomètre dans la deuxième cellule de la nouvelle ligne du tableau
 
         cell1.innerHTML = table.rows.length;
-        cell2.innerHTML = ". " + chronoTime;
-  
-
-
+        cell2.innerHTML = ". " + chronoTime;          
         
-          //  afficher_best() 
-        // var table2 = document.getElementById("tableau2");
-        // var newRow2 = table2.insertRow();
-        // var cell3 = newRow2.insertCell(0);
-        // cell3.style.color = "green"
-        // cell3.innerHTML = "Best : " + chronoTime
-        
-    
-
-      // afficher worst 
-
-
-
-      // afficher average
+          //  afficher_best()
 
       }}
 
@@ -353,7 +353,6 @@
   var lastRow = table.rows[table.rows.length - 1];
   table.deleteRow(lastRow.rowIndex);
 }
-    
 
 // activer et stopper le chrono en appuyant sur la spacebar
 
@@ -384,6 +383,9 @@
           var disparition_logo = document.getElementById("logo");
           disparition_logo.style.opacity = "0";
 
+          // var disparition_divparent = document.getElementById("bouton_parent_tout_supprimer");
+          // disparition_divparent.style.opacity = "0";
+
        // effet de retrecissement des elements de la page lors du démarrage du chrono 
 
         var retrecissement_h4 = document.getElementById("hh");
@@ -403,6 +405,9 @@
 
           var agrandissement_chrono = document.getElementById("chronotime");
           agrandissement_chrono.style.scale = "1.4";
+
+          var retrecissement_bouton_parent_tout_supprimer = document.getElementById("bouton_parent_tout_supprimer");
+          retrecissement_bouton_parent_tout_supprimer.style.scale = "0";
 
         } 
         
